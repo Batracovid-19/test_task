@@ -16,7 +16,12 @@ ActiveRecord::Schema.define(version: 2020_10_04_202830) do
   enable_extension "plpgsql"
 
   create_table "currencies", force: :cascade do |t|
-    t.string "currencies", null: false
+    t.string "base", default: "EUR", null: false
+    t.string "date", null: false
+    t.decimal "usd", precision: 15, scale: 7, null: false
+    t.decimal "uah", precision: 15, scale: 7, null: false
+    t.decimal "rub", precision: 15, scale: 7, null: false
+    t.decimal "ron", precision: 15, scale: 7, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
