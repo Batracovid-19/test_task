@@ -4,7 +4,7 @@ class ExchangerService
   end
 
   def call(currency = CurrencyService.new(params[:date]))
-    return unless params_present?
+    return OpenStruct.new('success?' => false, 'errors' => 'invalid params', 'response' => nil) unless params_present?
 
     currency = currency.call
 
@@ -24,6 +24,6 @@ class ExchangerService
   end
 
   def cross_course(currency)
-    params[:amount].to_d / (currency.response['rates'][params[:exchange_code_from].upcase] / currency.response['rates'][params[:exchange_code_to].upcase]).to_d
+    params[:amount].to_d / (currency.response['rates'][params[:exchange_code_from].upcase].to_d / currency.response['rates'][params[:exchange_code_to].upcase].to_d)
   end
 end
